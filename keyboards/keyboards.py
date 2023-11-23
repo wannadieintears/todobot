@@ -10,5 +10,6 @@ kb = ReplyKeyboardMarkup(
         ]
     ],
     resize_keyboard=True,
-    selective=True
+    selective=True,
+    input_field_placeholder="you're so cute <3"
 )

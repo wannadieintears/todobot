@@ -1,11 +1,11 @@
 import asyncio
 from aiogram import Bot, Dispatcher
-import data
+import settings
 from handlers import handlers
 
 
 async def main():
-    bot = Bot(data.token)
+    bot = Bot(settings.token)
     dp = Dispatcher()
 
     dp.include_routers(
