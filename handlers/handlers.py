@@ -2,7 +2,7 @@ import asyncpg
 from keyboards import keyboards
 from aiogram import F, Router
 from aiogram.types import Message
-from utils.states import Next_message
+from utils.states import Add_next_message, Delete_next_message
 from aiogram.fsm.context import FSMContext
 import settings
 
@@ -15,11 +15,11 @@ async def start(message: Message):
 
 @router.message(F.text.lower() == "add a todo")
 async def get_add_todo(message: Message, state: FSMContext):
-    await state.set_state(Next_message.mes)
+    await state.set_state(Add_next_message.mes)
     await message.answer("Tell me what do you wanna add in your todo.")
 
 
-@router.message(Next_message.mes)
+@router.message(Add_next_message.mes)
 async def add_todo(message: Message, state: FSMContext):
     await state.update_data(mes=message.text)
     await state.clear()
@@ -41,12 +41,12 @@ async def add_todo(message: Message, state: FSMContext):
 
 @router.message(F.text.lower() == "delete a todo")
 async def get_delete_todo(message: Message, state: FSMContext):
-    await state.set_state(Next_message.mes)
+    await state.set_state(Delete_next_message.mes)
     await message.answer("Tell me what do you wanna delete in your todo."
                          "Please, be sure in writing the todo in the exact way, how it's written in database!")
 
 
-@router.message(Next_message.mes)
+@router.message(Delete_next_message.mes)
 async def delete_todo(message: Message, state: FSMContext):
     await state.update_data(mes=message.text)
     await state.clear()
